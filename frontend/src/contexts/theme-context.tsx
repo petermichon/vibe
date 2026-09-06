@@ -12,8 +12,19 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+const LIGHT_BG = '#ffffff';
+const DARK_BG = '#0d0d0d';
+
+function setMetaThemeColor(isDark: boolean) {
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', isDark ? DARK_BG : LIGHT_BG);
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('auto');
+  const [theme, setTheme] = useState<Theme>(() => {
+    const saved = localStorage.getItem('theme');
+    return saved === 'dark' || saved === 'light' ? saved : 'auto';
+  });
 
   const [lastManualTheme, setLastManualTheme] = useState<'light' | 'dark'>(
     () => {
@@ -36,6 +47,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     root.classList.remove('light', 'dark');
     root.classList.add(effectiveTheme);
+    setMetaThemeColor(effectiveTheme === 'dark');
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -49,6 +61,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       const effectiveTheme = mediaQuery.matches ? 'dark' : 'light';
       root.classList.remove('light', 'dark');
       root.classList.add(effectiveTheme);
+      setMetaThemeColor(effectiveTheme === 'dark');
     };
 
     mediaQuery.addEventListener('change', handleChange);
