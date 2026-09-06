@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+@view-transition {
+  navigation-auto: none;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
@@ -85,48 +89,51 @@
   }
 }
 
-/* Scrollbar styles applied to scroll container via .scroll-container class */
-
-/* Light theme scrollbar */
-.light .scroll-container::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+/* Scrollbar */
+.scroll-container::-webkit-scrollbar {
+  width: 16px;
 }
 
-.light .scroll-container::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--border));
-  border-radius: 4px;
-  border: 1px solid hsl(var(--border));
-}
-
-.light .scroll-container::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(var(--muted-foreground));
-  border-color: hsl(var(--border));
-}
-
-/* Dark theme scrollbar */
-.dark .scroll-container::-webkit-scrollbar-track {
-  background: hsl(var(--background));
-}
-
-.dark .scroll-container::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--border));
-  border-radius: 4px;
-  border: 1px solid hsl(var(--border));
-}
-
-.dark .scroll-container::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(var(--muted-foreground));
-  border-color: hsl(var(--border));
-}
-
-.scroll-container::-webkit-scrollbar-corner {
+.scroll-container::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* Firefox scrollbar colors */
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.5);
+}
+
 .scroll-container {
   scrollbar-width: auto;
-  scrollbar-color: hsl(var(--border)) hsl(var(--background));
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+}
+
+/* Frosted glass pill with gradient edge */
+.glass-pill {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(
+        to bottom,
+        hsl(var(--background) / 0.45),
+        hsl(var(--background) / 0.44)
+      )
+      padding-box,
+    linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.03) 45%,
+        rgba(0, 0, 0, 0.05)
+      )
+      border-box;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
 }
 
 /* Hide top nav in player fullscreen mode */

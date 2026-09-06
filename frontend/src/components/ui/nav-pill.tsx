@@ -45,7 +45,7 @@ export function NavPill() {
     };
 
   const pillClass =
-    'rounded-full shadow-[inset_0_0_0_2px_rgba(128,128,128,0.2)] bg-linear-to-b from-background/80 to-background/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] shadow-[0_2px_8px_rgba(0,0,0,0.05)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] shadow-[inset_0_-1px_0_0_rgba(0,0,0,0.05)] transition-all duration-300';
+    'glass-pill rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.1)] shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-all duration-300';
 
   return (
     <nav className={cn('bottom-nav flex items-center gap-0 p-2', pillClass)}>
@@ -119,7 +119,7 @@ export function AddButton() {
   };
 
   const pillClass =
-    'rounded-full shadow-[inset_0_0_0_2px_rgba(128,128,128,0.2)] bg-linear-to-b from-background/80 to-background/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] shadow-[0_2px_8px_rgba(0,0,0,0.05)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] shadow-[inset_0_-1px_0_0_rgba(0,0,0,0.05)] transition-all duration-300';
+    'glass-pill rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.1)] shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-all duration-300';
 
   return (
     <button

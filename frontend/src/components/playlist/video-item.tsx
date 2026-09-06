@@ -333,7 +333,7 @@ export const VideoItem = memo(function VideoItem({
                     onClick={handleSaveEdit}
                     className="flex-1 h-8"
                   >
-                    <Check className="h-3.5 w-3.5 mr-1" />
+                    <Check className="h-4 w-4 mr-1" />
                     Save
                   </Button>
                   <Button
@@ -342,7 +342,7 @@ export const VideoItem = memo(function VideoItem({
                     onClick={handleCancelEdit}
                     className="flex-1 h-8"
                   >
-                    <X className="h-3.5 w-3.5 mr-1" />
+                    <X className="h-4 w-4 mr-1" />
                     Cancel
                   </Button>
                 </div>

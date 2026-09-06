@@ -329,7 +329,7 @@ export const VideoContainer = memo(function VideoContainer({
         className={
           layout === 'list'
             ? 'flex flex-col gap-2'
-            : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4'
+            : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-0'
         }
       >
         {onVideoAdded && layout === 'list' && (
@@ -379,7 +379,7 @@ export const VideoContainer = memo(function VideoContainer({
       </div>
 
       {onVideoAdded && layout !== 'list' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-0">
           <EmptyVideoCard onVideoAdded={onVideoAdded} />
         </div>
       )}

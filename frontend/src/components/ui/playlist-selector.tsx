@@ -232,14 +232,14 @@ export function PlaylistSelector({ onImportClick }: PlaylistSelectorProps) {
             onClick={handleImportFromMenu}
             className="w-full flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer border-none bg-transparent"
           >
-            <Download className="h-3.5 w-3.5" />
+            <Download className="h-4 w-4" />
             Import
           </button>
           <button
             onClick={handleCreateBlank}
             className="w-full flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer border-none bg-transparent"
           >
-            <Plus className="h-3.5 w-3.5" />
+            <Plus className="h-4 w-4" />
             Create blank
           </button>
         </div>
@@ -259,14 +259,14 @@ export function PlaylistSelector({ onImportClick }: PlaylistSelectorProps) {
             onClick={handleGlobalRename}
             className="w-full flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer border-none bg-transparent"
           >
-            <Pencil className="h-3.5 w-3.5" />
+            <Pencil className="h-4 w-4" />
             Rename
           </button>
           <button
             onClick={handleGlobalExport}
             className="w-full flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer border-none bg-transparent"
           >
-            <Upload className="h-3.5 w-3.5" />
+            <Upload className="h-4 w-4" />
             Export
           </button>
           <div className="px-3 py-1.5 border-t border-border/50">
@@ -290,7 +290,7 @@ export function PlaylistSelector({ onImportClick }: PlaylistSelectorProps) {
             onClick={handleGlobalDelete}
             className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:text-red-300 transition-colors cursor-pointer border-none bg-transparent"
           >
-            <Trash2 className="h-3.5 w-3.5" />
+            <Trash2 className="h-4 w-4" />
             Delete
           </button>
         </div>

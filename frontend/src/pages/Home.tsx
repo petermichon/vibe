@@ -488,7 +488,7 @@ export function Home() {
                 className="p-1.5 rounded-lg text-foreground/60 hover:text-foreground transition-colors"
                 aria-label="Close"
               >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               </button>
             </div>
 

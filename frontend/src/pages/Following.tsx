@@ -458,7 +458,7 @@ export function Following() {
                         }}
                         className="w-full flex items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-accent transition-colors cursor-pointer"
                       >
-                        <Edit className="h-3.5 w-3.5" />
+                        <Edit className="h-4 w-4" />
                         Edit
                       </button>
                       <button
@@ -557,7 +557,7 @@ export function Following() {
                 }}
                 className="p-1 rounded-md text-muted-foreground hover:text-foreground transition-colors"
               >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               </button>
             </div>
             <div className="space-y-3">
@@ -639,7 +639,7 @@ export function Following() {
                 }}
                 className="p-1 rounded-md text-muted-foreground hover:text-foreground transition-colors"
               >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               </button>
             </div>
             <div className="space-y-3">
@@ -719,7 +719,7 @@ export function Following() {
                 className="p-1.5 rounded-lg text-foreground/60 hover:text-foreground transition-colors"
                 aria-label="Close"
               >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               </button>
             </div>
 

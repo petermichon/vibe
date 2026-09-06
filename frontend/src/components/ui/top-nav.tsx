@@ -156,7 +156,10 @@ export function TopNav() {
   const openSettings = () => {
     if (settingsBtnRef.current) {
       const rect = settingsBtnRef.current.getBoundingClientRect();
-      setSettingsPos({ top: 64, right: window.innerWidth - rect.right });
+      setSettingsPos({
+        top: rect.bottom,
+        right: window.innerWidth - rect.right,
+      });
     }
     setSettingsOpen((prev) => !prev);
   };
@@ -211,7 +214,7 @@ export function TopNav() {
                     key={item.name}
                     to={item.href}
                     className={cn(
-                      'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                      'flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-colors',
                       isActive
                         ? 'text-foreground bg-foreground/10'
                         : 'text-muted-foreground hover:text-foreground'
@@ -239,7 +242,7 @@ export function TopNav() {
               onClick={openSettings}
               isActive={settingsOpen}
               ref={settingsBtnRef}
-              iconClassName="h-6 w-6"
+              iconClassName="h-5 w-5"
               buttonClassName={cn(
                 settingsOpen
                   ? 'text-foreground'
