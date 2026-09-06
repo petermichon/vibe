@@ -171,6 +171,17 @@ html.player-fullscreen .scroll-container::-webkit-scrollbar {
   }
 }
 
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
 ::selection {
   background-color: #d0d0d0;
   color: black;

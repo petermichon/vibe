@@ -1,15 +1,12 @@
 import { useState, useEffect, useRef, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import {
-  Play,
-  Home,
   WifiOff,
   Settings,
   Youtube,
   Sun,
   Moon,
   SunMoon,
-  Heart,
   Image,
 } from 'lucide-react';
 import { YouTubeAPI } from '@/services/youtube-api';
@@ -17,34 +14,24 @@ import { useLocation, Link } from 'react-router-dom';
 import { LogoBlack, LogoWhite } from '@/components/ui/logo';
 import { useTheme } from '@/contexts/theme-context';
 import { cn } from '@/lib/utils';
-
-const NAVIGATION_ITEMS = [
-  { name: 'Home', href: '/', icon: Home },
-  { name: 'Player', href: '/player', icon: Play },
-  { name: 'Following', href: '/following', icon: Heart },
-];
+import { NAVIGATION_ITEMS } from '@/lib/navigation';
 
 interface NavButtonProps {
   icon: React.ComponentType<{ className?: string }>;
   text?: string;
   onClick?: () => void;
-  href?: string;
   isActive?: boolean;
   className?: string;
   buttonClassName?: string;
   iconClassName?: string;
 }
 
-const NavButton = forwardRef<
-  HTMLAnchorElement | HTMLButtonElement,
-  NavButtonProps
->(
+const NavButton = forwardRef<HTMLButtonElement, NavButtonProps>(
   (
     {
       icon: Icon,
       text,
       onClick,
-      href,
       isActive,
       className,
       buttonClassName,
@@ -61,31 +48,15 @@ const NavButton = forwardRef<
       </div>
     );
 
-    if (href) {
-      return (
-        <Link
-          to={href}
-          ref={ref as React.Ref<HTMLAnchorElement>}
-          className={cn(
-            'flex flex-col items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-            isActive && 'text-foreground',
-            !isActive && 'text-muted-foreground hover:text-foreground',
-            className
-          )}
-        >
-          {content}
-        </Link>
-      );
-    }
-
     return (
       <button
-        ref={ref as React.Ref<HTMLButtonElement>}
+        ref={ref}
         onClick={onClick}
         className={cn(
           'flex items-center gap-1.5 px-2 py-2 rounded-xl text-sm transition-colors cursor-pointer',
           isActive && 'text-foreground',
           !isActive && 'text-muted-foreground hover:text-foreground',
+          className,
           buttonClassName
         )}
       >
@@ -110,19 +81,13 @@ export function TopNav() {
     }
   );
   const [isOnline, setIsOnline] = useState(() => navigator.onLine);
-  const [indicatorStyle, setIndicatorStyle] = useState<{
-    left: number;
-    width: number;
-  }>({ left: 0, width: 0 });
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [settingsPos, setSettingsPos] = useState({ top: 0, right: 0 });
   const [youtubePermission, setYoutubePermission] = useState(
     () => localStorage.getItem('youtube-permission') !== 'false'
   );
-  const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const settingsBtnRef = useRef<HTMLButtonElement>(null);
   const settingsPopupRef = useRef<HTMLDivElement>(null);
-  const [isNavHovered, setIsNavHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
 
@@ -171,24 +136,6 @@ export function TopNav() {
     return () =>
       window.removeEventListener('background-changed', handleBackgroundChange);
   }, []);
-
-  useEffect(() => {
-    const activeIndex = NAVIGATION_ITEMS.findIndex(
-      (item) => item.href === location.pathname
-    );
-    if (activeIndex !== -1 && navRefs.current[activeIndex]) {
-      const navItem = navRefs.current[activeIndex];
-      const parent = navItem.parentElement;
-      if (parent) {
-        const parentRect = parent.getBoundingClientRect();
-        if (parentRect.width === 0 || parentRect.height === 0) return;
-        const navRect = navItem.getBoundingClientRect();
-        const lineCenter = navRect.left - parentRect.left + navRect.width / 2;
-        const width = isNavHovered ? 48 : 16;
-        setIndicatorStyle({ left: lineCenter - width / 2, width });
-      }
-    }
-  }, [location.pathname, isNavHovered, isVisible]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -255,36 +202,27 @@ export function TopNav() {
               </div>
             </Link>
 
-            <div
-              className="hidden md:flex items-center ml-4 relative"
-              onMouseEnter={() => setIsNavHovered(true)}
-              onMouseLeave={() => setIsNavHovered(false)}
-            >
-              {NAVIGATION_ITEMS.map((item, index) => {
+            <nav className="hidden md:flex items-center gap-1 ml-2">
+              {NAVIGATION_ITEMS.map((item) => {
                 const isActive = location.pathname === item.href;
+                const Icon = item.icon;
                 return (
-                  <NavButton
+                  <Link
                     key={item.name}
-                    ref={(el) => {
-                      navRefs.current[index] = el as HTMLAnchorElement;
-                    }}
-                    icon={item.icon}
-                    text={item.name}
-                    href={item.href}
-                    isActive={isActive}
-                  />
+                    to={item.href}
+                    className={cn(
+                      'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                      isActive
+                        ? 'text-foreground bg-foreground/10'
+                        : 'text-muted-foreground hover:text-foreground'
+                    )}
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{item.name}</span>
+                  </Link>
                 );
               })}
-              {indicatorStyle.width > 0 && (
-                <div
-                  className="absolute bottom-[-4px] h-0.5 bg-foreground rounded-full transition-all duration-300 ease-out"
-                  style={{
-                    left: indicatorStyle.left,
-                    width: indicatorStyle.width,
-                  }}
-                />
-              )}
-            </div>
+            </nav>
           </div>
 
           <div className="flex-1" />
