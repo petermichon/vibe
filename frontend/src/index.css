@@ -1,53 +1,76 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 62% 55%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 80%;
-    --input: 0 0% 80%;
-    --ring: 0 0% 9%;
-    --radius: 0.5rem;
-    --accent-color: #ef4444;
-  }
+@custom-variant dark (&:where(.dark, .dark *));
 
-  .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 8%;
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 95%;
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 95%;
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
-    --ring: 0 0% 55%;
-  }
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 62% 55%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 80%;
+  --input: 0 0% 80%;
+  --ring: 0 0% 9%;
+  --radius: 0.5rem;
+  --accent-color: #ef4444;
+}
+
+.dark {
+  --background: 0 0% 5%;
+  --foreground: 0 0% 95%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 95%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 0 0% 95%;
+  --primary-foreground: 0 0% 8%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 95%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 55%;
+  --accent: 0 0% 15%;
+  --accent-foreground: 0 0% 95%;
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 0 0% 95%;
+  --border: 0 0% 25%;
+  --input: 0 0% 25%;
+  --ring: 0 0% 55%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
 }
 
 @layer base {
@@ -62,59 +85,48 @@
   }
 }
 
-/* Default browser scrollbar styles */
-::-webkit-scrollbar {
-  width: auto;
-  height: auto;
-}
+/* Scrollbar styles applied to scroll container via .scroll-container class */
 
-/* Always show scrollbar for webkit browsers */
-html {
-  overflow-y: scroll !important;
-}
-
-/* Light theme scrollbar: using exact light theme colors */
-.light ::-webkit-scrollbar-track {
+/* Light theme scrollbar */
+.light .scroll-container::-webkit-scrollbar-track {
   background: hsl(var(--background));
 }
 
-.light ::-webkit-scrollbar-thumb {
+.light .scroll-container::-webkit-scrollbar-thumb {
   background-color: hsl(var(--border));
   border-radius: 4px;
   border: 1px solid hsl(var(--border));
 }
 
-.light ::-webkit-scrollbar-thumb:hover {
+.light .scroll-container::-webkit-scrollbar-thumb:hover {
   background-color: hsl(var(--muted-foreground));
   border-color: hsl(var(--border));
 }
 
-/* Dark theme scrollbar: using exact dark theme colors */
-.dark ::-webkit-scrollbar-track {
+/* Dark theme scrollbar */
+.dark .scroll-container::-webkit-scrollbar-track {
   background: hsl(var(--background));
 }
 
-.dark ::-webkit-scrollbar-thumb {
+.dark .scroll-container::-webkit-scrollbar-thumb {
   background-color: hsl(var(--border));
   border-radius: 4px;
   border: 1px solid hsl(var(--border));
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
+.dark .scroll-container::-webkit-scrollbar-thumb:hover {
   background-color: hsl(var(--muted-foreground));
   border-color: hsl(var(--border));
 }
 
-::-webkit-scrollbar-corner {
+.scroll-container::-webkit-scrollbar-corner {
   background: transparent;
 }
 
-/* Firefox scrollbar colors: thumb first, then track - using exact theme colors */
-html {
+/* Firefox scrollbar colors */
+.scroll-container {
   scrollbar-width: auto;
   scrollbar-color: hsl(var(--border)) hsl(var(--background));
-  /* Always show scrollbar even when content doesn't overflow */
-  overflow-y: scroll;
 }
 
 /* Hide top nav in player fullscreen mode */
@@ -124,11 +136,6 @@ html.player-fullscreen .top-nav {
 
 /* Hide bottom nav in player fullscreen mode */
 html.player-fullscreen .bottom-nav {
-  display: none !important;
-}
-
-/* Hide footer in player fullscreen mode */
-html.player-fullscreen .app-footer {
   display: none !important;
 }
 
@@ -143,12 +150,12 @@ html.player-fullscreen .app-layout {
 }
 
 /* Hide scrollbar in player fullscreen mode */
-html.player-fullscreen {
+html.player-fullscreen .scroll-container {
   overflow-y: auto !important;
   scrollbar-width: none !important;
 }
 
-html.player-fullscreen::-webkit-scrollbar {
+html.player-fullscreen .scroll-container::-webkit-scrollbar {
   width: 0px;
   height: 0px;
 }

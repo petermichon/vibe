@@ -45,7 +45,7 @@ export function BottomNav() {
 
   return (
     <div className="bottom-nav-container md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-4 z-50">
-      <nav className="bottom-nav rounded-full shadow-[inset_0_0_0_2px_rgba(128,128,128,0.2)] bg-gradient-to-b from-background/80 to-background/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] shadow-[0_2px_8px_rgba(0,0,0,0.05)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] shadow-[inset_0_-1px_0_0_rgba(0,0,0,0.05)] transition-all duration-300">
+      <nav className="bottom-nav rounded-full shadow-[inset_0_0_0_2px_rgba(128,128,128,0.2)] bg-linear-to-b from-background/80 to-background/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] shadow-[0_2px_8px_rgba(0,0,0,0.05)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] shadow-[inset_0_-1px_0_0_rgba(0,0,0,0.05)] transition-all duration-300">
         <div className="flex h-full items-center justify-center p-2 gap-0">
           {NAVIGATION_ITEMS.map((item) => {
             const isActive = location.pathname === item.href;
@@ -99,7 +99,7 @@ export function BottomNav() {
           window.dispatchEvent(new CustomEvent('open-add-dialog'));
         }}
         className={cn(
-          'flex items-center justify-center w-12 h-12 rounded-full shadow-[inset_0_0_0_2px_rgba(128,128,128,0.2)] bg-gradient-to-b from-background/80 to-background/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] shadow-[0_2px_8px_rgba(0,0,0,0.05)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] shadow-[inset_0_-1px_0_0_rgba(0,0,0,0.05)] hover:bg-foreground/10 active:scale-90 transition-all duration-300 relative overflow-hidden touch-action-manipulation select-none',
+          'flex items-center justify-center w-12 h-12 rounded-full shadow-[inset_0_0_0_2px_rgba(128,128,128,0.2)] bg-linear-to-b from-background/80 to-background/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] shadow-[0_2px_8px_rgba(0,0,0,0.05)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] shadow-[inset_0_-1px_0_0_rgba(0,0,0,0.05)] hover:bg-foreground/10 active:scale-90 transition-all duration-300 relative overflow-hidden touch-action-manipulation select-none',
           location.pathname === '/player' &&
             'opacity-0 w-0 p-0 pointer-events-none'
         )}

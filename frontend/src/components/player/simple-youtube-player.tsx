@@ -216,8 +216,7 @@ export function SimpleYoutubePlayer({
         if (plyrContainer) {
           const onRawState = (e: Event) => {
             const detail = (e as CustomEvent).detail as
-              | { code?: unknown }
-              | undefined;
+              { code?: unknown } | undefined;
             dbg(`statechange(RAW DOM) mount#${mountId}`, {
               code: detail?.code,
             });
