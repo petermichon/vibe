@@ -216,7 +216,7 @@ export function TopNav() {
                     className={cn(
                       'flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-colors',
                       isActive
-                        ? 'text-foreground bg-foreground/10'
+                        ? 'text-foreground'
                         : 'text-muted-foreground hover:text-foreground'
                     )}
                   >
