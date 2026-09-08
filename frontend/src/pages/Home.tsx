@@ -47,26 +47,9 @@ export function Home() {
   } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [backgroundImage, setBackgroundImage] = useState(() => {
-    return localStorage.getItem('home-background');
-  });
-  const [backgroundMode, setBackgroundMode] = useState<'normal' | 'custom'>(
-    () => {
-      const savedMode = localStorage.getItem('background-mode');
-      if (savedMode === 'normal' || savedMode === 'custom') {
-        return savedMode;
-      }
-      return 'custom';
-    }
-  );
-
   const [showAddVideoDialog, setShowAddVideoDialog] = useState(false);
   const [newVideoUrl, setNewVideoUrl] = useState('');
   const addVideoInputRef = useRef<HTMLInputElement>(null);
-
-  const currentBackgroundVideoId = backgroundImage
-    ? (backgroundImage.match(/\/vi\/([^/]+)\//)?.[1] ?? null)
-    : null;
 
   const reversedVideos = useMemo(() => [...videos].reverse(), [videos]);
 
@@ -92,22 +75,6 @@ export function Home() {
     return () => {
       window.removeEventListener('open-add-dialog', handleOpenAddDialog);
     };
-  }, []);
-
-  // Listen for background changes
-  useEffect(() => {
-    const handleBackgroundChange = () => {
-      setBackgroundImage(localStorage.getItem('home-background'));
-      const savedMode = localStorage.getItem('background-mode');
-      if (savedMode === 'normal' || savedMode === 'custom') {
-        setBackgroundMode(savedMode);
-      } else {
-        setBackgroundMode('custom');
-      }
-    };
-    window.addEventListener('background-changed', handleBackgroundChange);
-    return () =>
-      window.removeEventListener('background-changed', handleBackgroundChange);
   }, []);
 
   // Scroll to top when location changes
@@ -245,15 +212,18 @@ export function Home() {
     }
   };
 
+  const currentBackgroundVideoId = (() => {
+    const bg = localStorage.getItem('home-background');
+    return bg ? (bg.match(/\/vi\/([^/]+)\//)?.[1] ?? null) : null;
+  })();
+
   const handleSetBackground = useCallback(
     (videoId: string) => {
       const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
       if (currentBackgroundVideoId === videoId) {
         localStorage.removeItem('home-background');
-        setBackgroundImage(null);
       } else {
         localStorage.setItem('home-background', thumbnailUrl);
-        setBackgroundImage(thumbnailUrl);
       }
       window.dispatchEvent(new CustomEvent('background-changed'));
     },
@@ -262,36 +232,6 @@ export function Home() {
 
   return (
     <div className="relative">
-      {/* Background Image */}
-      {backgroundMode === 'custom' && backgroundImage && (
-        <div
-          className="fixed inset-0"
-          style={{
-            backgroundImage:
-              backgroundImage.startsWith('linear-gradient') ||
-              backgroundImage.startsWith('radial-gradient')
-                ? backgroundImage
-                : `url(${backgroundImage})`,
-            backgroundSize:
-              backgroundImage?.startsWith('linear-gradient') ||
-              backgroundImage?.startsWith('radial-gradient')
-                ? 'cover'
-                : 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            zIndex: 0,
-            transition: 'background-image 0.5s ease-in-out',
-          }}
-        >
-          <div
-            className="absolute inset-0 backdrop-blur-[100px]"
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            }}
-          />
-        </div>
-      )}
-
       <div className="relative z-10 md:px-8 md:py-8">
         <div className="max-w-7xl mx-auto">
           {/* Playlist Selector */}
